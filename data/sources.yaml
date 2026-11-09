@@ -1,0 +1,21 @@
+# RSS-ленты, откуда бот берёт новости.
+# Можно добавлять и удалять строки. Если лента перестанет работать,
+# бот продолжит с остальными, а команда /sources покажет её статус.
+#   name   — как источник подписывается в сообщениях
+#            (лучше писать так же, как издание называется в Google Новостях, —
+#             тогда одна и та же статья из двух лент не считается «двумя изданиями»)
+#   url    — адрес RSS
+#   topic  — подсказка: general | sport | entertainment
+
+- {name: Google Новости, url: "https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en", topic: general}
+- {name: Google Новости · Индия, url: "https://news.google.com/rss/headlines/section/topic/NATION?hl=en-IN&gl=IN&ceid=IN:en", topic: general}
+- {name: Google Новости · Спорт, url: "https://news.google.com/rss/headlines/section/topic/SPORTS?hl=en-IN&gl=IN&ceid=IN:en", topic: sport}
+- {name: Google Новости · Шоу-бизнес, url: "https://news.google.com/rss/headlines/section/topic/ENTERTAINMENT?hl=en-IN&gl=IN&ceid=IN:en", topic: entertainment}
+- {name: The Times of India, url: "https://timesofindia.indiatimes.com/rssfeedstopstories.cms", topic: general}
+- {name: NDTV, url: "https://feeds.feedburner.com/ndtvnews-top-stories", topic: general}
+- {name: The Hindu, url: "https://www.thehindu.com/news/national/feeder/default.rss", topic: general}
+- {name: The Indian Express, url: "https://indianexpress.com/section/india/feed/", topic: general}
+- {name: Hindustan Times, url: "https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml", topic: general}
+- {name: India Today, url: "https://www.indiatoday.in/rss/home", topic: general}
+- {name: ESPNcricinfo, url: "https://www.espncricinfo.com/rss/content/story/feeds/0.xml", topic: sport}
+- {name: Hindustan Times · Bollywood, url: "https://www.hindustantimes.com/feeds/rss/entertainment/bollywood/rssfeed.xml", topic: entertainment}

@@ -1,0 +1,153 @@
+# Профиль страны для «СМИ Бот». Код бота общий для всех стран — здесь всё, что отличает Индию.
+
+code: IN                      # код «вся страна» (в календаре: scope: IN)
+national_aliases: [INDIA, ИНДИЯ]
+flag: "🇮🇳"
+name: Индия
+name_gen: Индии               # «Инфоповоды Индии»
+name_loc: в Индии             # «Главное в Индии»
+all_country: Вся Индия
+timezone: Asia/Kolkata
+tz_label: по Дели (IST)
+source_lang: en               # индийские ленты — на английском; переводчик: en → ru
+source_lang_name: английском
+trends_geo: IN
+add_example: "20.12.2026 | Концерт Arijit Singh в Мумбаи | MH | festival | NSCI Dome"
+
+region_words: {one: штат, many: штаты, gen_many: штатов, all: Все штаты и территории, short: штат,
+  holiday: Праздник штата, holiday_tip: "Выходной или праздник в штате: у клиентов оттуда больше свободного времени и праздничное настроение."}
+buttons_per_row: 6
+
+# код: [по-русски, название по-английски, часть страны]
+# 28 штатов + 8 союзных территорий (UT). Коды — общепринятые сокращения (как на номерах машин).
+regions:
+  AP: [Андхра-Прадеш, Andhra Pradesh, Юг]
+  AR: [Аруначал-Прадеш, Arunachal Pradesh, Северо-Восток]
+  AS: [Ассам, Assam, Северо-Восток]
+  BR: [Бихар, Bihar, Восток]
+  CG: [Чхаттисгарх, Chhattisgarh, Центр]
+  GA: [Гоа, Goa, Запад]
+  GJ: [Гуджарат, Gujarat, Запад]
+  HR: [Харьяна, Haryana, Север]
+  HP: [Химачал-Прадеш, Himachal Pradesh, Север]
+  JH: [Джаркханд, Jharkhand, Восток]
+  KA: [Карнатака, Karnataka, Юг]
+  KL: [Керала, Kerala, Юг]
+  MP: [Мадхья-Прадеш, Madhya Pradesh, Центр]
+  MH: [Махараштра, Maharashtra, Запад]
+  MN: [Манипур, Manipur, Северо-Восток]
+  ML: [Мегхалая, Meghalaya, Северо-Восток]
+  MZ: [Мизорам, Mizoram, Северо-Восток]
+  NL: [Нагаленд, Nagaland, Северо-Восток]
+  OD: {ru: Одиша, local: Odisha, group: Восток, detect: [Odisha, Orissa]}
+  PB: [Пенджаб, Punjab, Север]
+  RJ: [Раджастхан, Rajasthan, Север]
+  SK: [Сикким, Sikkim, Северо-Восток]
+  TN: [Тамилнад, Tamil Nadu, Юг]
+  TG: [Телангана, Telangana, Юг]
+  TR: [Трипура, Tripura, Северо-Восток]
+  UP: [Уттар-Прадеш, Uttar Pradesh, Север]
+  UK: {ru: Уттаракханд, local: Uttarakhand, group: Север, detect: [Uttarakhand, Uttaranchal]}
+  WB: [Западная Бенгалия, West Bengal, Восток]
+  AN: {ru: Андаманские и Никобарские о-ва, local: Andaman and Nicobar Islands, group: Союзная территория, detect: [Andaman, Andaman and Nicobar]}
+  CH: [Чандигарх, Chandigarh, Союзная территория]
+  DH: {ru: Дадра и Нагар-Хавели и Даман и Диу, local: Dadra and Nagar Haveli and Daman and Diu, group: Союзная территория, detect: [Dadra and Nagar Haveli, Daman and Diu, Daman]}
+  DL: [Дели, Delhi, Союзная территория]
+  JK: {ru: Джамму и Кашмир, local: Jammu and Kashmir, group: Союзная территория, detect: [Jammu and Kashmir, Kashmir, Jammu, Srinagar]}
+  LA: [Ладакх, Ladakh, Союзная территория]
+  LD: [Лакшадвип, Lakshadweep, Союзная территория]
+  PY: {ru: Пудучерри, local: Puducherry, group: Союзная территория, detect: [Puducherry, Pondicherry]}
+
+# Как бесплатный режим находит штат в заголовке: «предлог + название штата» («floods in Assam» → AS).
+# Дели не размечаем: оттуда почти все общенациональные новости (правительство, суды, ведомства).
+detect_prefix: "in|at|from|across|of|near|hit|hits|rock|rocks|lash|lashes|batter|batters|pound|pounds|grip|grips|ravage|ravages"
+detect_skip: [DL]
+# Названия, в которых есть штат, но новость не про штат (команды IPL, ISL, PKL и т. п.).
+detect_ignore: [Punjab Kings, Rajasthan Royals, Gujarat Titans, Kerala Blasters, Bengal Warriors, Gujarat Giants,
+  Haryana Steelers, Tamil Thalaivas, Telugu Titans, UP Warriorz, UP Yoddhas, Punjab National Bank, Bank of Maharashtra,
+  Kerala Story]
+
+# Слова для бесплатной оценки важности (сравниваются без учёта регистра и знаков препинания).
+scoring:
+  stopwords: >
+    a an the of in on at to for from by with without about after before over under into onto as and or but nor so
+    is are was were be been being has have had do does did will would can could may might must shall should not no
+    this that these those it its he she they them his her their we you i me my our your who whom which what when
+    where why how all any some more most less many much very just also than then there here up down out off new
+    says said say amid over after says report reports watch video live updates latest news today yesterday tomorrow
+    year years day days know check details here's heres
+  strong: [dies, died, death, dead, passes away, passed away, demise, killed, kills, tragedy, tragic, collapse, collapses,
+    collapsed, explosion, blast, stampede, massacre, terror attack, terrorist attack, shooting, earthquake,
+    flood, floods, flash flood, landslide, cyclone, fire, blaze, plane crash, air crash, crash, derails, derailment,
+    train accident, resigns, resignation, steps down, arrested, arrest, impeachment, sworn in, wins, champions,
+    clinch, clinches, title, world cup, retires, retirement, announces retirement, sacked, ceasefire, war, airstrike,
+    airstrikes, emergency]
+  famous: [modi, narendra modi, rahul gandhi, amit shah, kejriwal, yogi adityanath, mamata, nitish kumar, droupadi murmu,
+    virat kohli, kohli, rohit sharma, shubman gill, ms dhoni, dhoni, jasprit bumrah, bumrah, sachin tendulkar,
+    hardik pandya, suryakumar, rishabh pant, neeraj chopra, shah rukh khan, shahrukh, srk, salman khan, aamir khan,
+    amitabh bachchan, deepika padukone, alia bhatt, ranbir kapoor, ranveer singh, priyanka chopra, katrina kaif,
+    allu arjun, prabhas, rajinikanth, vijay, arijit singh, diljit dosanjh, mukesh ambani, ambani, gautam adani, adani,
+    ratan tata, tata, reliance, infosys, bcci, ipl, team india, isro, rbi, sensex, nifty, supreme court,
+    election commission, pakistan, china, bigg boss]
+  low: [recipe, recipes, horoscope, horoscopes, rashifal, zodiac, numerology, tarot, how to, step by step, tips to,
+    offer, offers, discount, coupon, deal, deals, sale price, lottery, lottery result, dream11, fantasy team,
+    prediction, match prediction, playing 11, playing xi, where to watch, live streaming, gold rate today,
+    gold price today, silver rate today, petrol price today, diesel price today, quiz, wordle, sponsored]
+  sport: [cricket, test match, odi, t20, t20i, ipl, bcci, icc, wicket, wickets, century, innings, captain, coach, squad,
+    batter, bowler, football, isl, fifa, hockey, kabaddi, badminton, chess, olympics, tennis, wrestling, boxing,
+    athletics, javelin, formula 1, f1, team india, kohli, rohit sharma, bumrah, dhoni, gill]
+  politics: [modi, bjp, congress, aap, tmc, government, govt, parliament, lok sabha, rajya sabha, minister, chief minister,
+    cm, election, elections, polls, mla, mp, opposition, cabinet, president, governor, supreme court, high court,
+    rahul gandhi, amit shah]
+  economy: [rupee, inflation, rbi, repo rate, gdp, sensex, nifty, stock market, shares, ipo, tax, gst, income tax, budget,
+    fuel price, petrol, diesel, salary, salaries, economy, economic, adani, ambani, reliance, startup, layoffs, jobs]
+  incident: [dies, died, death, dead, killed, accident, police, crime, murder, arrested, fire, explosion, blast, stampede,
+    tragedy, shot, attack, rape, assault, kidnapped]
+  weather: [rain, rains, heavy rain, monsoon, flood, floods, heatwave, heat wave, cold wave, fog, cyclone, imd,
+    landslide, cloudburst, pollution, aqi, smog, storm, thunderstorm, snowfall, drought]
+  showbiz: [bollywood, tollywood, kollywood, actor, actress, film, movie, box office, trailer, teaser, song, singer,
+    concert, web series, netflix, ott, celebrity, star, wedding, bigg boss, award, awards, filmfare]
+
+ai_prompt: |
+  Ты — редактор русскоязычной ленты об Индии для менеджеров, работающих с индийскими клиентами.
+  Им важно знать громкие инфоповоды, которые обсуждает вся страна (или отдельный штат), чтобы понимать настроение аудитории.
+
+  Для каждой новости поставь важность от 1 до 10 по шкале «насколько это будут обсуждать индийцы сегодня»:
+  10 — шок национального масштаба: смерть суперзвезды (уровня Шахрукх Кхана, Вирата Кохли, Амитабха Баччана), теракт или катастрофа с массовыми жертвами, военное обострение с Пакистаном, отставка премьер-министра, сборная Индии по крикету выиграла/проиграла финал чемпионата мира.
+  8–9 — главная тема дня по всей стране: итог матча Индия — Пакистан, финал IPL, громкий скандал, серьёзная стихия (циклон, наводнение) в крупном штате, итоги выборов, резкий шок в экономике (рупия, бензин, налоги).
+  6–7 — заметная новость, которую обсуждают многие: ключевые матчи сборной, крупные решения властей, премьеры и свадьбы звёзд Болливуда.
+  4–5 — обычная заметная новость.
+  1–3 — рутинные, локальные, узкие темы, реклама, гороскопы, рецепты, «как сделать», курсы золота и бензина «на сегодня», прогнозы на фэнтези-лиги, пресс-релизы.
+  Новости других стран важны, только если сильно касаются Индии.
+
+  Правила:
+  - title_ru — короткий ясный заголовок по-русски (до 110 символов), без кликбейта. Имена — в привычной русской транскрипции (Моди, Вират Кохли, Шахрукх Кхан, «Мумбаи Индианс»).
+  - summary_ru — 1–2 предложения по-русски: что случилось и почему это важно. Только факты из заголовка и описания, ничего не выдумывай.
+  - state — код штата из списка ниже, если новость про один штат; IN — если общенациональная (в том числе всё, что решают в Дели на уровне страны); INT — если про другую страну.
+  - duplicate — true, если это та же история, что уже есть в списке «Уже отправлено» или в этой же пачке выше (повтор того же события другими словами).
+  - events — заполняй только если в новости объявлено конкретное будущее массовое событие в Индии с точной датой (концерт звезды, матч сборной, финал турнира, фестиваль, выходной). Не добавляй прошедшие события и события без точной даты.
+  Коды штатов: {regions}.
+  Сегодня: {today}.
+
+colors:
+  stripe: [[255, 153, 51], [255, 255, 255], [19, 136, 8]]
+  accent: [255, 153, 51]
+  glow1: [19, 136, 8]
+  glow2: [255, 153, 51]
+
+welcome_rows:
+  - "Громкие новости — сразу, как только появились"
+  - "Утренний дайджест главного за сутки"
+  - "Праздники и матчи — за 5, 3, 1 день и в день события"
+  - "Региональные события — по выбранным штатам"
+
+# Примеры для автотеста (tests/test_country.py): заголовок → какой штат и тему должен определить бесплатный режим.
+self_test:
+  - {title: "Heavy rains lash Kerala, IMD issues red alert in 5 districts", state: KL, category: weather}
+  - {title: "Virat Kohli announces retirement from Test cricket", state: IN, category: sport}
+  - {title: "Fire breaks out at chemical factory in Gujarat, 3 dead", state: GJ, category: incident}
+  - {title: "RBI keeps repo rate unchanged, rupee rises against dollar", state: IN, category: economy}
+  - {title: "Parliament passes new bill as opposition walks out", state: IN, category: politics}
+  - {title: "Shah Rukh Khan's new film breaks box office records", state: IN, category: showbiz}
+  - {title: "Shreyas Iyer to lead Punjab Kings in IPL 2027", state: IN, category: sport}
+  - {title: "Gold rate today: check latest prices in your city", low: true}

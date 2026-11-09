@@ -1,0 +1,111 @@
+# Профиль страны для «СМИ Бот». Код бота общий для всех стран — здесь всё, что отличает Бразилию.
+
+code: BR                      # код «вся страна» (в календаре: scope: BR)
+national_aliases: [BRASIL, BRAZIL]
+flag: "🇧🇷"
+name: Бразилия
+name_gen: Бразилии            # «Инфоповоды Бразилии»
+name_loc: в Бразилии          # «Главное в Бразилии»
+all_country: Вся Бразилия
+timezone: America/Sao_Paulo
+tz_label: по Бразилиа
+source_lang: pt               # язык новостей — для бесплатного переводчика
+source_lang_name: португальском
+trends_geo: BR
+add_example: "21.11.2026 | Концерт Анитты в Рио | RJ | festival | Стадион Маракана"
+
+region_words: {one: штат, many: штаты, gen_many: штатов, all: Все штаты, short: штат, holiday: Праздник штата,
+  holiday_tip: "Выходной в штате: у клиентов оттуда больше свободного времени днём."}
+buttons_per_row: 5
+
+# код: [по-русски, местное название, макрорегион]
+regions:
+  AC: [Акри, Acre, Север]
+  AL: [Алагоас, Alagoas, Северо-Восток]
+  AP: [Амапа, Amapá, Север]
+  AM: [Амазонас, Amazonas, Север]
+  BA: [Баия, Bahia, Северо-Восток]
+  CE: [Сеара, Ceará, Северо-Восток]
+  DF: [Федеральный округ, Distrito Federal, Центр-Запад]
+  ES: [Эспириту-Санту, Espírito Santo, Юго-Восток]
+  GO: [Гояс, Goiás, Центр-Запад]
+  MA: [Мараньян, Maranhão, Северо-Восток]
+  MT: [Мату-Гросу, Mato Grosso, Центр-Запад]
+  MS: [Мату-Гросу-ду-Сул, Mato Grosso do Sul, Центр-Запад]
+  MG: [Минас-Жерайс, Minas Gerais, Юго-Восток]
+  PA: [Пара, Pará, Север]
+  PB: [Параиба, Paraíba, Северо-Восток]
+  PR: [Парана, Paraná, Юг]
+  PE: [Пернамбуку, Pernambuco, Северо-Восток]
+  PI: [Пиауи, Piauí, Северо-Восток]
+  RJ: [Рио-де-Жанейро, Rio de Janeiro, Юго-Восток]
+  RN: [Риу-Гранди-ду-Норти, Rio Grande do Norte, Северо-Восток]
+  RS: [Риу-Гранди-ду-Сул, Rio Grande do Sul, Юг]
+  RO: [Рондония, Rondônia, Север]
+  RR: [Рорайма, Roraima, Север]
+  SC: [Санта-Катарина, Santa Catarina, Юг]
+  SP: [Сан-Паулу, São Paulo, Юго-Восток]
+  SE: [Сержипи, Sergipe, Северо-Восток]
+  TO: [Токантинс, Tocantins, Север]
+
+# Как бесплатный режим находит штат в заголовке: «предлог + название штата».
+detect_prefix: "no|na|em|do|da|de|para o|para a"
+detect_skip: [SP, RJ]
+
+scoring:
+  stopwords: >
+    a o as os um uma uns umas de do da dos das no na nos nas em por para pelo pela pelos pelas com sem sob sobre
+    e ou mas que se ao aos à às é são foi ser ter tem têm há como mais menos muito já não sim seu sua seus suas
+    ele ela eles elas isso este esta esse essa após até entre contra diz dizem veja saiba entenda vídeo video
+    quem qual quando onde porque hoje ontem amanhã anos ano dia dias novo nova vai vão pode podem após
+  strong: [morre, morreu, morte, falece, faleceu, velorio, tragedia, desaba, desabamento, explosao, massacre, atentado,
+    tiroteio, terremoto, enchente, enchentes, deslizamento, incendio, queda de aviao, acidente aereo, renuncia,
+    impeachment, preso, prisao, campeao, campea, conquista o titulo, vence a final, titulo, rebaixado, demitido,
+    anuncia aposentadoria, aposentadoria]
+  famous: [neymar, vini jr, vinicius junior, ancelotti, pele, anitta, ludmilla, ivete, gusttavo lima, virginia,
+    lula, bolsonaro, alexandre de moraes, stf, selecao, flamengo, palmeiras, corinthians, vasco, fluminense,
+    botafogo, gremio, internacional, cruzeiro, atletico, santos, libertadores, brasileirao, copa do brasil,
+    bbb, carnaval, petrobras, dolar, pix, inss, bolsa familia, enem]
+  low: [receita, receitas, horoscopo, signo, signos, como fazer, passo a passo, promocao, cupom, desconto,
+    loteria, mega sena, quina, lotofacil, resultado da, palpite, onde assistir, horario do jogo, escalacao]
+  sport: [gol, jogo, partida, campeonato, brasileirao, libertadores, copa, tecnico, treinador, atacante, zagueiro,
+    goleiro, selecao, fifa, cbf, formula 1, f1, ufc, tenis, volei, basquete, nba, flamengo, palmeiras, corinthians,
+    vasco, fluminense, botafogo, gremio, cruzeiro]
+  politics: [lula, bolsonaro, governo, congresso, senado, camara, stf, ministro, eleicao, deputado, senador, presidente]
+  economy: [dolar, inflacao, selic, juros, pib, bolsa, ibovespa, petrobras, imposto, salario minimo, banco central]
+  incident: [morre, morte, acidente, tiroteio, preso, policia, crime, assassinato, incendio, explosao, tragedia]
+  weather: [chuva, chuvas, enchente, temporal, calor, onda de calor, frio, seca, ciclone, alerta da defesa civil]
+  showbiz: [cantor, cantora, ator, atriz, show, novela, bbb, influenciadora, famosa, famoso, filme, serie]
+
+ai_prompt: |
+  Ты — редактор русскоязычной ленты о Бразилии для менеджеров, работающих с бразильскими клиентами.
+  Им важно знать громкие инфоповоды, которые обсуждает вся страна (или отдельный штат), чтобы понимать настроение аудитории.
+
+  Для каждой новости поставь важность от 1 до 10 по шкале «насколько это будут обсуждать бразильцы сегодня»:
+  10 — шок национального масштаба: смерть суперзвезды (уровня Неймара, Пеле, Анитты), катастрофа с массовыми жертвами, отставка президента, сборная Бразилии выиграла/проиграла финал.
+  8–9 — главная тема дня по всей стране: громкий трансфер звезды, итог финала турнира, крупный скандал, серьёзная стихия в крупном штате, резкий шок в экономике.
+  6–7 — заметная новость, которую обсуждают многие: результаты ключевых матчей топ-клубов, крупные решения властей, новости знаменитостей.
+  4–5 — обычная заметная новость.
+  1–3 — рутинные, локальные, узкие темы, реклама, гороскопы, рецепты, «как сделать», пресс-релизы.
+  Новости других стран важны, только если сильно касаются Бразилии.
+
+  Правила:
+  - title_ru — короткий ясный заголовок по-русски (до 110 символов), без кликбейта. Имена — в привычной русской транскрипции (Неймар, Лула, Анитта, «Фламенго»).
+  - summary_ru — 1–2 предложения по-русски: что случилось и почему это важно. Только факты из заголовка и описания, ничего не выдумывай.
+  - state — двухбуквенный код штата, если новость про один штат; BR — если общенациональная; INT — если про другую страну.
+  - duplicate — true, если это та же история, что уже есть в списке «Уже отправлено» или в этой же пачке выше (повтор того же события другими словами).
+  - events — заполняй только если в новости объявлено конкретное будущее массовое событие в Бразилии с точной датой (концерт звезды, финал турнира, матч сборной, фестиваль, госпраздник/выходной). Не добавляй прошедшие события и события без точной даты.
+  Коды штатов: {regions}.
+  Сегодня: {today}.
+
+colors:
+  stripe: [[0, 156, 59], [255, 223, 0], [0, 39, 118]]
+  accent: [255, 223, 0]
+  glow1: [0, 156, 59]
+  glow2: [255, 223, 0]
+
+welcome_rows:
+  - "Громкие новости — сразу, как только появились"
+  - "Утренний дайджест главного за сутки"
+  - "Праздники и матчи — за 5, 3, 1 день и в день события"
+  - "Региональные события — по выбранным штатам"

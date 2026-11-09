@@ -1,0 +1,749 @@
+# Календарь событий Индии для «СМИ Бот».
+#
+# Как добавить событие — скопируйте блок и поменяйте поля:
+#   id          уникальный латинский идентификатор
+#   name_ru     название по-русски (идёт в карточку)
+#   name_local  оригинальное название (по-английски / на хинди латиницей)
+#   category    holiday | state_holiday | festival | sport | commercial | culture
+#   scope       IN (вся страна) или список штатов: [MH, GJ]
+#   importance  1 — региональное, 2 — заметное, 3 — главное
+#   about       что это (1–2 предложения)
+#   tip         подсказка менеджерам (если пусто — общая по категории)
+#   place       город/площадка (необязательно)
+# Дата задаётся одним из правил:
+#   fixed: "MM-DD"                      каждый год
+#   date: "YYYY-MM-DD" (+ end: ...)     разово
+#   easter: N                           N дней от Пасхи (католической)
+#   nth_weekday: {month, weekday (0=пн..6=вс), n (-1 = последний)}
+#   offset: N                           сдвиг после вычисления
+#   duration: N                         длительность в днях
+#
+# ВАЖНО: большинство индийских праздников идут по лунному календарю (Дивали, Холи, Ид…),
+# их даты каждый год разные. Здесь они записаны конкретными датами до конца 2027 года —
+# по официальному списку праздников правительства Индии на 2026 и 2027 годы
+# (DoPT, Delhi/New Delhi: gazetted и restricted holidays). Исламские праздники могут сдвинуться
+# на день по наблюдению луны. Список на 2028 год правительство публикует летом 2027 —
+# тогда достаточно добавить новые даты (те же блоки с другим date).
+# Праздники штатов — справочно, перед важными акциями лучше сверить.
+
+# ─────────────────────────── Государственные праздники (фиксированные) ───────────────────────────
+
+- id: republic_day
+  name_ru: День Республики
+  name_local: Republic Day
+  category: holiday
+  scope: IN
+  importance: 3
+  fixed: "01-26"
+  about: Главный государственный праздник — день вступления в силу Конституции. Парад в Дели на Карттавья-патх, выходной по всей стране.
+  tip: Патриотический день — уместны поздравления в цветах флага. Многие берут длинные выходные.
+
+- id: independence_day
+  name_ru: День независимости
+  name_local: Independence Day
+  category: holiday
+  scope: IN
+  importance: 3
+  fixed: "08-15"
+  about: Государственный выходной. Премьер-министр выступает с Красного форта в Дели, по всей стране поднимают флаги и запускают воздушных змеев.
+  tip: Патриотический подъём — хороший повод для поздравления. Распродажи «Freedom Sale» у крупных магазинов.
+
+- id: gandhi_jayanti
+  name_ru: День рождения Махатмы Ганди
+  name_local: Gandhi Jayanti
+  category: holiday
+  scope: IN
+  importance: 2
+  fixed: "10-02"
+  about: Государственный выходной в честь Махатмы Ганди. Во многих штатах в этот день не продают алкоголь.
+  tip: Спокойный, уважительный день — без развлекательного тона.
+
+- id: christmas
+  name_ru: Рождество
+  name_local: Christmas
+  category: holiday
+  scope: IN
+  importance: 2
+  fixed: "12-25"
+  about: Государственный выходной. Особенно широко отмечают в Гоа, Керале, на северо-востоке и в больших городах; у многих — отпуск до Нового года.
+  tip: В конце декабря клиенты уходят на каникулы — поздравления и акции лучше заранее.
+
+- id: new_year
+  name_ru: Новый год
+  name_local: New Year's Day
+  category: commercial
+  scope: IN
+  importance: 2
+  fixed: "01-01"
+  about: Не государственный выходной, но в городах — большой праздник с вечеринками в ночь на 1 января; многие банки и офисы работают.
+  tip: Поздравить 31 декабря или утром 1-го; вечер 31-го — пик развлечений и онлайн-активности.
+
+- id: ambedkar_jayanti
+  name_ru: День рождения доктора Амбедкара
+  name_local: Ambedkar Jayanti
+  category: holiday
+  scope: IN
+  importance: 1
+  fixed: "04-14"
+  about: Выходной в большинстве штатов в честь автора Конституции Б. Р. Амбедкара. В тот же день — новый год по солнечному календарю в ряде штатов (Вайсакхи, Вишу, Путханду).
+
+- id: good_friday
+  name_ru: Страстная пятница
+  name_local: Good Friday
+  category: holiday
+  scope: IN
+  importance: 1
+  easter: -2
+  about: Государственный выходной. Особенно заметен в Керале, Гоа и на северо-востоке.
+
+# ─────────────────────────── Ноябрь — декабрь 2026 ───────────────────────────
+
+- id: bhai_dooj_2026
+  name_ru: Бхай Дудж
+  name_local: Bhai Dooj
+  category: festival
+  scope: IN
+  importance: 1
+  date: "2026-11-11"
+  about: Последний день праздников Дивали — сёстры молятся за братьев, братья дарят подарки. Семейный праздник, особенно на севере страны.
+
+- id: chhath_2026
+  name_ru: Чхатх-пуджа
+  name_local: Chhath Puja
+  category: festival
+  scope: [BR, JH, UP, DL]
+  importance: 2
+  date: "2026-11-13"
+  end: "2026-11-16"
+  about: Четырёхдневный праздник Бога Солнца — главный праздник Бихара и востока Уттар-Прадеша; молитвы на закате 15 и рассвете 16 ноября у рек и водоёмов. Миллионы людей едут домой.
+  tip: У клиентов из Бихара, Джаркханда и восточного Уттар-Прадеша — семейные дни и поездки, отвечают медленнее.
+
+- id: childrens_day
+  name_ru: День детей
+  name_local: Children's Day (Bal Diwas)
+  category: culture
+  scope: IN
+  importance: 1
+  fixed: "11-14"
+  about: День рождения первого премьер-министра Джавахарлала Неру. Праздники в школах, подарки детям; не выходной.
+
+- id: guru_nanak_2026
+  name_ru: День рождения Гуру Нанака
+  name_local: Guru Nanak Jayanti (Gurpurab)
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2026-11-24"
+  about: Государственный выходной в честь основателя сикхизма. Главный праздник Пенджаба — шествия, бесплатные трапезы (лангар) у гурдвар. В этот же день — Дев-Дипавали в Варанаси и день памяти Гуру Тегх Бахадура.
+  tip: Для клиентов из Пенджаба и сикхов по всему миру — важный день, уместно тёплое поздравление.
+
+- id: dev_deepawali_2026
+  name_ru: Дев-Дипавали в Варанаси
+  name_local: Dev Deepawali (Kartik Purnima)
+  category: festival
+  scope: [UP]
+  importance: 1
+  date: "2026-11-24"
+  place: Варанаси, гхаты Ганга
+  about: «Дивали богов» — гхаты Варанаси освещают более миллиона светильников. Одно из самых зрелищных событий года, много туристов.
+
+- id: hornbill_festival
+  name_ru: Фестиваль Хорнбилл
+  name_local: Hornbill Festival
+  category: festival
+  scope: [NL]
+  importance: 1
+  fixed: "12-01"
+  duration: 10
+  place: Кисама, под Кохимой
+  about: «Фестиваль фестивалей» Нагаленда — культура всех нагских племён, музыка, рок-концерты. Начинается в День штата Нагаленд.
+
+- id: goa_liberation
+  name_ru: День освобождения Гоа
+  name_local: Goa Liberation Day
+  category: state_holiday
+  scope: [GA]
+  importance: 1
+  fixed: "12-19"
+  about: Выходной в Гоа в память об окончании португальского правления в 1961 году. Разгар туристического сезона.
+
+- id: new_years_eve
+  name_ru: Новогодняя ночь
+  name_local: New Year's Eve
+  category: commercial
+  scope: IN
+  importance: 2
+  fixed: "12-31"
+  about: Вечеринки, концерты и поездки в Гоа, горы и большие города. Пик онлайн-активности и трат.
+  tip: Финальные новогодние акции лучше запускать за несколько дней до 31-го.
+
+# ─────────────────────────── 2027 ───────────────────────────
+
+- id: lohri
+  name_ru: Лори
+  name_local: Lohri
+  category: festival
+  scope: [PB, HR, HP, DL, JK, CH]
+  importance: 1
+  fixed: "01-13"
+  about: Праздник урожая и конца зимы в Пенджабе и на севере — костры, танцы бхангра, сладости. Особенно празднуют первый Лори молодожёнов и новорождённых.
+
+- id: makar_sankranti_2027
+  name_ru: Макар-санкранти
+  name_local: Makar Sankranti / Uttarayan
+  category: festival
+  scope: IN
+  importance: 2
+  date: "2027-01-14"
+  about: Праздник урожая по солнечному календарю — отмечают по всей стране под разными именами. В Гуджарате (Уттараян) — фестиваль воздушных змеев, в Тамилнаде — Понгал, в Ассаме — Магх-биху.
+  tip: Праздничные сладости и подарки; в Гуджарате два дня все на крышах запускают змеев.
+
+- id: pongal_2027
+  name_ru: Понгал
+  name_local: Pongal (Thai Pongal)
+  category: state_holiday
+  scope: [TN, PY]
+  importance: 2
+  date: "2027-01-14"
+  end: "2027-01-17"
+  about: Главный праздник Тамилнада — четыре дня урожая (Бхоги, Тай-Понгал 15 января, Матту-Понгал, Каанум-Понгал). Выходные, поездки в родные деревни.
+  tip: У клиентов из Тамилнада — длинные праздничные выходные, лучше поздравить заранее.
+
+- id: magh_bihu_2027
+  name_ru: Магх-биху
+  name_local: Magh Bihu (Bhogali Bihu)
+  category: state_holiday
+  scope: [AS]
+  importance: 1
+  date: "2027-01-14"
+  end: "2027-01-15"
+  about: Праздник урожая в Ассаме — общие застолья, костры меджи, традиционные игры.
+
+- id: union_budget
+  name_ru: Бюджет Индии
+  name_local: Union Budget
+  category: culture
+  scope: IN
+  importance: 2
+  fixed: "02-01"
+  about: Министр финансов представляет годовой бюджет — налоги, цены, льготы. Главная экономическая тема дня во всех СМИ.
+  tip: Клиенты обсуждают изменения налогов и цен — хороший день, чтобы быть в курсе новостей.
+
+- id: vasant_panchami_2027
+  name_ru: Васант-панчами
+  name_local: Vasant Panchami / Saraswati Puja
+  category: festival
+  scope: IN
+  importance: 1
+  date: "2027-02-11"
+  about: Праздник весны и богини знаний Сарасвати — жёлтая одежда, молитвы перед учёбой. Особенно отмечают в Западной Бенгалии, Бихаре, на севере.
+
+- id: valentines
+  name_ru: День святого Валентина
+  name_local: Valentine's Day
+  category: commercial
+  scope: IN
+  importance: 1
+  fixed: "02-14"
+  about: Популярен у городской молодёжи — подарки, кафе, онлайн-покупки; неделя перед ним — «Valentine week».
+
+- id: maha_shivratri_2027
+  name_ru: Маха-Шиваратри
+  name_local: Maha Shivratri
+  category: festival
+  scope: IN
+  importance: 1
+  date: "2027-03-06"
+  about: Великая ночь Шивы — пост, ночные бдения и толпы в храмах Шивы по всей стране.
+
+- id: eid_fitr_2027
+  name_ru: Ид аль-Фитр (Ураза-байрам)
+  name_local: Id-ul-Fitr (Eid al-Fitr)
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2027-03-10"
+  about: Государственный выходной — праздник окончания Рамадана. Дата может сдвинуться на день по наблюдению луны.
+  tip: Для клиентов-мусульман — главный праздник года; уместно поздравление «Eid Mubarak».
+
+- id: holi_2027
+  name_ru: Холи
+  name_local: Holi (Holika Dahan + Dhulandi)
+  category: holiday
+  scope: IN
+  importance: 3
+  date: "2027-03-22"
+  end: "2027-03-23"
+  about: Праздник красок и весны — вечером 22 марта костры Холика-дахан, 23 марта (выходной) все обсыпают друг друга цветными красками. Один из самых любимых праздников.
+  tip: Один из главных поводов года для ярких поздравлений и акций; 23-го клиенты празднуют и почти не на связи.
+
+- id: ugadi_2027
+  name_ru: Угади / Гуди-падва — Новый год
+  name_local: Ugadi / Gudi Padwa
+  category: state_holiday
+  scope: [MH, KA, AP, TG, GA]
+  importance: 2
+  date: "2027-04-07"
+  about: Новый год по лунному календарю — в Махараштре (Гуди-падва), Карнатаке, Андхре и Телангане (Угади). В этот же день начинается весенний Наваратри. Удачный день для покупок.
+  tip: Поздравление с Новым годом для клиентов из этих штатов будет очень к месту.
+
+- id: baisakhi_2027
+  name_ru: Вайсакхи / Вишу / Путханду — Новый год
+  name_local: Baisakhi / Vishu / Puthandu
+  category: state_holiday
+  scope: [PB, HR, KL, TN]
+  importance: 2
+  date: "2027-04-14"
+  about: Новый год по солнечному календарю — Вайсакхи в Пенджабе (праздник урожая и сикхов), Вишу в Керале, Путханду в Тамилнаде.
+
+- id: bohag_bihu_2027
+  name_ru: Бохаг-биху (Ронгали-биху)
+  name_local: Bohag Bihu (Rongali Bihu)
+  category: state_holiday
+  scope: [AS]
+  importance: 2
+  date: "2027-04-14"
+  end: "2027-04-16"
+  about: Ассамский Новый год и главный праздник штата — танцы биху, новые одежды, несколько дней выходных.
+
+- id: poila_boishakh_2027
+  name_ru: Пойла-Бойшакх — бенгальский Новый год
+  name_local: Pohela Boishakh
+  category: state_holiday
+  scope: [WB, TR]
+  importance: 2
+  date: "2027-04-15"
+  about: Новый год в Западной Бенгалии и Трипуре — выходной, новые одежды, торговцы открывают новые книги учёта.
+
+- id: ram_navami_2027
+  name_ru: Рама-навами
+  name_local: Ram Navami
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2027-04-15"
+  about: Государственный выходной — рождение бога Рамы. Шествия и толпы в храмах, особенно в Айодхье.
+
+- id: mahavir_jayanti_2027
+  name_ru: Махавир-джаянти
+  name_local: Mahavir Jayanti
+  category: holiday
+  scope: IN
+  importance: 1
+  date: "2027-04-19"
+  about: Государственный выходной — день рождения основателя джайнизма Махавиры. Особенно важен для джайнской общины (Гуджарат, Раджастхан, Мумбаи).
+
+- id: new_financial_year
+  name_ru: Новый финансовый год
+  name_local: Financial year start
+  category: commercial
+  scope: IN
+  importance: 1
+  fixed: "04-01"
+  about: В Индии финансовый год начинается 1 апреля — новые налоговые правила, бюджеты компаний, повышения зарплат. Конец марта — время закрытия годовых планов.
+
+- id: eid_adha_2027
+  name_ru: Ид аль-Адха (Курбан-байрам)
+  name_local: Id-ul-Zuha (Bakrid)
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2027-05-17"
+  about: Государственный выходной — праздник жертвоприношения. Дата может сдвинуться на день по наблюдению луны.
+  tip: Для клиентов-мусульман — большой семейный праздник; уместно «Eid Mubarak».
+
+- id: buddha_purnima_2027
+  name_ru: Будда-пурнима
+  name_local: Buddha Purnima
+  category: holiday
+  scope: IN
+  importance: 1
+  date: "2027-05-20"
+  about: Государственный выходной — день рождения Будды.
+
+- id: mothers_day
+  name_ru: День матери
+  name_local: Mother's Day
+  category: commercial
+  scope: IN
+  importance: 1
+  nth_weekday: {month: 5, weekday: 6, n: 2}
+  about: "Второе воскресенье мая — популярен в городах: подарки, цветы, рестораны, онлайн-покупки."
+
+- id: muharram_2027
+  name_ru: Мухаррам
+  name_local: Muharram (Ashura)
+  category: holiday
+  scope: IN
+  importance: 1
+  date: "2027-06-16"
+  about: Государственный выходной. Для мусульман-шиитов — день траура (Ашура), шествия. Дата может сдвинуться по наблюдению луны.
+  tip: Траурный день — без развлекательного тона в коммуникации с клиентами-мусульманами.
+
+- id: fathers_day
+  name_ru: День отца
+  name_local: Father's Day
+  category: commercial
+  scope: IN
+  importance: 1
+  nth_weekday: {month: 6, weekday: 6, n: 3}
+  about: Третье воскресенье июня — подарки отцам, популярен в городах.
+
+- id: yoga_day
+  name_ru: Международный день йоги
+  name_local: International Yoga Day
+  category: culture
+  scope: IN
+  importance: 1
+  fixed: "06-21"
+  about: Массовые занятия йогой по всей стране, премьер-министр проводит большое мероприятие. Заметный патриотический и «здоровый» инфоповод.
+
+- id: rath_yatra_2027
+  name_ru: Ратха-ятра в Пури
+  name_local: Rath Yatra
+  category: festival
+  scope: [OD]
+  importance: 2
+  date: "2027-07-05"
+  place: Пури
+  about: Шествие колесниц Джаганнатха — одно из крупнейших религиозных событий страны, в Пури собираются сотни тысяч паломников; трансляции по всей Индии.
+
+- id: friendship_day
+  name_ru: День дружбы
+  name_local: Friendship Day
+  category: commercial
+  scope: IN
+  importance: 1
+  nth_weekday: {month: 8, weekday: 6, n: 1}
+  about: "Первое воскресенье августа — в Индии популярен у молодёжи: браслеты дружбы, встречи, поздравления в соцсетях."
+
+- id: kumbh_snan_1_2027
+  name_ru: Кумбха-мела в Нашике — первое омовение
+  name_local: Nashik-Trimbakeshwar Simhastha Kumbh — 1st Amrit Snan
+  category: festival
+  scope: [MH]
+  importance: 2
+  date: "2027-08-02"
+  place: Нашик и Тримбакешвар
+  about: Симхастха Кумбха-мела (раз в 12 лет) — миллионы паломников. Первое из трёх главных омовений; следующие — 31 августа и 11–12 сентября.
+
+- id: kumbh_snan_2_2027
+  name_ru: Кумбха-мела в Нашике — главное омовение
+  name_local: Nashik Kumbh — Mahakumbh Snan
+  category: festival
+  scope: [MH]
+  importance: 2
+  date: "2027-08-31"
+  place: Нашик и Тримбакешвар
+  about: Самый многолюдный день Кумбха-мелы в Нашике — ожидаются миллионы паломников, большие ограничения движения.
+
+- id: kumbh_snan_3_2027
+  name_ru: Кумбха-мела в Нашике — третье омовение
+  name_local: Nashik Kumbh — 3rd Amrit Snan
+  category: festival
+  scope: [MH]
+  importance: 1
+  date: "2027-09-11"
+  end: "2027-09-12"
+  place: Нашик (11.09) и Тримбакешвар (12.09)
+  about: Последнее из главных омовений Симхастха Кумбха-мелы.
+
+- id: raksha_bandhan_2027
+  name_ru: Ракша-бандхан
+  name_local: Raksha Bandhan (Rakhi)
+  category: festival
+  scope: IN
+  importance: 2
+  date: "2027-08-17"
+  about: Сёстры повязывают братьям браслет-ракхи, братья дарят подарки. Один из самых любимых семейных праздников — большой сезон подарков и онлайн-покупок.
+  tip: Пик подарочных покупок — акции стоит запускать за неделю.
+
+- id: janmashtami_2027
+  name_ru: Джанмаштами
+  name_local: Janmashtami
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2027-08-25"
+  about: Государственный выходной — рождение Кришны. Ночные службы, в Махараштре — состязания «дахи-ханди» (живые пирамиды).
+
+- id: ganesh_chaturthi_2027
+  name_ru: Ганеш-чатуртхи
+  name_local: Ganesh Chaturthi
+  category: state_holiday
+  scope: [MH, GA, KA, TG, AP]
+  importance: 3
+  date: "2027-09-04"
+  end: "2027-09-14"
+  about: Десятидневный праздник Ганеши — главный праздник Махараштры (Мумбаи, Пуне). Огромные статуи, шествия и погружение идолов в воду в последний день (Анант-чатурдаши, 14 сентября).
+  tip: В Мумбаи и Пуне — праздник всего города, пробки и выходные; для клиентов оттуда это лучший повод для поздравлений.
+
+- id: teachers_day
+  name_ru: День учителя
+  name_local: Teachers' Day
+  category: culture
+  scope: IN
+  importance: 1
+  fixed: "09-05"
+  about: День рождения президента-философа Сарвепалли Радхакришнана — в школах и вузах поздравляют учителей.
+
+- id: onam_2027
+  name_ru: Онам
+  name_local: Onam (Thiru Onam)
+  category: state_holiday
+  scope: [KL]
+  importance: 2
+  date: "2027-09-12"
+  about: "Главный праздник Кералы — праздник урожая: цветочные ковры, пир онам-садья, гонки змеиных лодок. Праздничная неделя с выходными вокруг дня Тиру-Онам."
+  tip: Для клиентов из Кералы — лучший повод для поздравления в году.
+
+- id: navratri_2027
+  name_ru: Наваратри
+  name_local: Navratri
+  category: festival
+  scope: IN
+  importance: 2
+  date: "2027-09-30"
+  end: "2027-10-08"
+  about: Девять ночей богини Дурги. В Гуджарате — ночные танцы гарба и дандия по всему штату, на севере — посты, на востоке — Дурга-пуджа. Завершается Дуссерой.
+  tip: Начало главного праздничного и торгового сезона года, который идёт до Дивали.
+
+- id: durga_puja_2027
+  name_ru: Дурга-пуджа
+  name_local: Durga Puja
+  category: state_holiday
+  scope: [WB, AS, TR, OD, BR, JH]
+  importance: 3
+  date: "2027-10-06"
+  end: "2027-10-09"
+  about: Главный праздник Западной Бенгалии (Калькутта) — тысячи павильонов-пандалов, весь город гуляет ночами. Выходные с Саптами до Виджая-дашами.
+  tip: В Бенгалии в эти дни мало кто работает — поздравить лучше до 6 октября.
+
+- id: dussehra_2027
+  name_ru: Дуссера (Виджая-дашами)
+  name_local: Dussehra / Vijayadashami
+  category: holiday
+  scope: IN
+  importance: 3
+  date: "2027-10-09"
+  about: "Государственный выходной — победа добра над злом: сжигают огромные чучела Раваны. Благоприятный день для покупок, в Майсуру — знаменитое шествие."
+
+- id: karva_chauth_2027
+  name_ru: Карва-чаутх
+  name_local: Karva Chauth
+  category: culture
+  scope: [DL, PB, HR, RJ, UP, MP, CH]
+  importance: 1
+  date: "2027-10-18"
+  about: Замужние женщины на севере Индии постятся от рассвета до восхода луны ради мужей. Популярный повод для подарков и ювелирных покупок.
+
+- id: dhanteras_2027
+  name_ru: Дхантерас
+  name_local: Dhanteras
+  category: commercial
+  scope: IN
+  importance: 3
+  date: "2027-10-27"
+  about: Первый день праздников Дивали — самый благоприятный день года для покупки золота, украшений, техники и машин. Пик продаж.
+  tip: Главный торговый день года — предложения и поздравления нужно готовить заранее.
+
+- id: diwali_2027
+  name_ru: Дивали
+  name_local: Diwali (Deepavali)
+  category: holiday
+  scope: IN
+  importance: 3
+  date: "2027-10-29"
+  about: "Главный праздник Индии — праздник огней: светильники, фейерверки, молитва богине Лакшми, подарки и сладости. Праздничные дни — с Дхантераса 27 октября до Бхай Дуджа 31 октября."
+  tip: Самый важный повод года для поздравлений («Happy Diwali») и подарков. Вокруг праздника у многих отпуск — деловые вопросы лучше решить до 27-го.
+
+- id: diwali_after_2027
+  name_ru: Говардхан-пуджа и Бхай Дудж
+  name_local: Govardhan Puja, Bhai Dooj
+  category: festival
+  scope: IN
+  importance: 1
+  date: "2027-10-30"
+  end: "2027-10-31"
+  about: Завершение праздников Дивали — семейные дни; в Гуджарате 30 октября — Новый год (Бесту варас).
+
+- id: chhath_2027
+  name_ru: Чхатх-пуджа
+  name_local: Chhath Puja
+  category: festival
+  scope: [BR, JH, UP, DL]
+  importance: 2
+  date: "2027-11-02"
+  end: "2027-11-05"
+  about: Четырёхдневный праздник Бога Солнца — главный праздник Бихара; молитвы на закате 4 и рассвете 5 ноября у рек. Миллионы людей едут домой.
+  tip: У клиентов из Бихара, Джаркханда и восточного Уттар-Прадеша — семейные дни и поездки.
+
+- id: guru_nanak_2027
+  name_ru: День рождения Гуру Нанака
+  name_local: Guru Nanak Jayanti (Gurpurab)
+  category: holiday
+  scope: IN
+  importance: 2
+  date: "2027-11-14"
+  about: Государственный выходной в честь основателя сикхизма. Главный праздник Пенджаба — шествия и лангар у гурдвар.
+
+# ─────────────────────────── Дни штатов ───────────────────────────
+
+- id: maharashtra_day
+  name_ru: День Махараштры
+  name_local: Maharashtra Day
+  category: state_holiday
+  scope: [MH]
+  importance: 1
+  fixed: "05-01"
+  about: Выходной в Махараштре (Мумбаи, Пуне) — день образования штата. Совпадает с Днём труда.
+
+- id: gujarat_day
+  name_ru: День Гуджарата
+  name_local: Gujarat Day (Gujarat Sthapana Divas)
+  category: state_holiday
+  scope: [GJ]
+  importance: 1
+  fixed: "05-01"
+  about: День образования штата Гуджарат.
+
+- id: telangana_day
+  name_ru: День образования Теланганы
+  name_local: Telangana Formation Day
+  category: state_holiday
+  scope: [TG]
+  importance: 1
+  fixed: "06-02"
+  about: Выходной в Телангане (Хайдарабад) — штат образован в 2014 году.
+
+- id: utkal_divas
+  name_ru: День Одиши
+  name_local: Utkal Divas
+  category: state_holiday
+  scope: [OD]
+  importance: 1
+  fixed: "04-01"
+  about: Выходной в Одише — день образования штата.
+
+- id: bihar_diwas
+  name_ru: День Бихара
+  name_local: Bihar Diwas
+  category: state_holiday
+  scope: [BR]
+  importance: 1
+  fixed: "03-22"
+  about: День образования штата Бихар — торжества в Патне.
+
+- id: rajasthan_diwas
+  name_ru: День Раджастхана
+  name_local: Rajasthan Diwas
+  category: state_holiday
+  scope: [RJ]
+  importance: 1
+  fixed: "03-30"
+  about: День образования штата Раджастхан — фестивали в Джайпуре.
+
+- id: november_1_states
+  name_ru: День образования штатов
+  name_local: Karnataka Rajyotsava, Kerala Piravi, Haryana Day, MP & Chhattisgarh Foundation Day
+  category: state_holiday
+  scope: [KA, KL, HR, MP, CG]
+  importance: 1
+  fixed: "11-01"
+  about: 1 ноября образованы сразу несколько штатов. Карнатака-раджьотсава — выходной и большой праздник в Карнатаке (Бенгалуру), Керала-пирави — день Кералы.
+
+- id: uttarakhand_day
+  name_ru: День Уттаракханда
+  name_local: Uttarakhand Foundation Day
+  category: state_holiday
+  scope: [UK]
+  importance: 1
+  fixed: "11-09"
+  about: День образования штата Уттаракханд (2000 год).
+
+- id: jharkhand_day
+  name_ru: День Джаркханда
+  name_local: Jharkhand Foundation Day / Birsa Munda Jayanti
+  category: state_holiday
+  scope: [JH]
+  importance: 1
+  fixed: "11-15"
+  about: Выходной в Джаркханде — день образования штата и день рождения героя Бирсы Мунды.
+
+# ─────────────────────────── Спорт ───────────────────────────
+
+- id: cricket_ind_sl_2026
+  name_ru: "Крикет: Индия — Шри-Ланка"
+  name_local: India vs Sri Lanka (3 ODI + 3 T20I)
+  category: sport
+  scope: IN
+  importance: 1
+  date: "2026-12-13"
+  end: "2026-12-27"
+  place: Дели, Бенгалуру, Ахмадабад, Раджкот, Каттак, Пуне
+  about: Домашняя серия сборной Индии — три однодневных матча (13, 16, 19 декабря) и три T20 (22, 24, 27 декабря).
+
+- id: cricket_ind_zim_2027
+  name_ru: "Крикет: Индия — Зимбабве"
+  name_local: India vs Zimbabwe (3 ODI)
+  category: sport
+  scope: IN
+  importance: 1
+  date: "2027-01-03"
+  end: "2027-01-09"
+  place: Калькутта, Хайдарабад, Мумбаи
+  about: Три однодневных матча — 3, 6 и 9 января.
+
+- id: border_gavaskar_2027
+  name_ru: "Крикет: Кубок Бордера — Гаваскара (Индия — Австралия)"
+  name_local: Border-Gavaskar Trophy 2027
+  category: sport
+  scope: IN
+  importance: 3
+  date: "2027-01-21"
+  end: "2027-03-03"
+  place: Нагпур, Ченнаи, Гувахати, Ранчи, Ахмадабад
+  about: Пять тестовых матчей с Австралией — главное крикетное противостояние сезона. Матчи 21–25 января, 29 января — 2 февраля, 11–15, 19–23 февраля и 27 февраля — 3 марта.
+  tip: Крикет — тема номер один в разговорах; итоги матчей будут обсуждать все.
+
+- id: ipl_2027
+  name_ru: Старт IPL 2027
+  name_local: Indian Premier League 2027
+  category: sport
+  scope: IN
+  importance: 3
+  date: "2027-03-10"
+  end: "2027-05-15"
+  about: Главная крикетная лига мира — два месяца матчей каждый вечер. Даты предварительные (по заявлениям BCCI — окно 10 марта — 15 мая), точное расписание объявят позже.
+  tip: На весь сезон IPL вечера заняты матчами — это главный фон для рекламы и общения с клиентами.
+
+- id: odi_wc_2027
+  name_ru: Чемпионат мира по крикету (ODI)
+  name_local: ICC Men's Cricket World Cup 2027
+  category: sport
+  scope: IN
+  importance: 3
+  date: "2027-10-02"
+  end: "2027-11-21"
+  place: ЮАР, Зимбабве, Намибия
+  about: Главный турнир по крикету. Первый матч Индии — против Австралии 7 октября; в группе также Пакистан, Афганистан и Зимбабве. Финал — 21 ноября.
+  tip: Матчи Индии, особенно с Пакистаном, — самые обсуждаемые события года.
+
+- id: odi_wc_2027_ind_aus
+  name_ru: "ЧМ по крикету: Индия — Австралия"
+  name_local: CWC 2027 — India vs Australia
+  category: sport
+  scope: IN
+  importance: 2
+  date: "2027-10-07"
+  about: Первый матч Индии на чемпионате мира, реванш за финал 2023 года.
+
+- id: odi_wc_2027_final
+  name_ru: Финал чемпионата мира по крикету
+  name_local: ICC Cricket World Cup 2027 Final
+  category: sport
+  scope: IN
+  importance: 3
+  date: "2027-11-21"
+  place: ЮАР
+  about: Финал чемпионата мира. Если в нём Индия — это главное событие года для всей страны.
